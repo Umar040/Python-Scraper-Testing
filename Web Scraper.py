@@ -19,9 +19,6 @@ for x in range(1,numberOfCourses+1):
 
 #/html/body/main/article/section[2]/div/div[2]/div/div/div[1]/a/div[1]/div/div[3]
 #/html/body/main/article/section[2]/div/div[2]/div/div/div[2]/a/div[1]/div/div[3]
-#/html/body/main/article/section[2]/div/div[2]/div/div/div[3]/a/div[1]/div/div[3]
-#/html/body/main/article/section[2]/div/div[2]/div/div/div[4]/a/div[1]/div/div[3]
-#/html/body/main/article/section[2]/div/div[2]/div/div/div[5]/a/div[1]/div/div[3]
 #...
 #/html/body/main/article/section[2]/div/div[2]/div/div/div[266]/a/div[1]/div/div[3]
 
