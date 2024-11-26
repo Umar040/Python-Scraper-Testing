@@ -1,12 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from chromedriver_py import binary_path
 
-cService = webdriver.ChromeService(executable_path='C:/Users/Muna2/Downloads/chromedriver-win64/chromedriver.exe') #Change to your installation location of Chrome Driver
+cService = webdriver.ChromeService(executable_path=binary_path) #Get the chrome service from the pip install
 driver = webdriver.Chrome(service = cService)
 
 url = 'https://www.bmet.ac.uk/courses/' #Url being searched
 
-driver.get(url)
+driver.get(url)#Opens chrome tab with the url provided
 
 numberOfCourses = '/html/body/main/article/section[2]/div/div[1]/div/div[1]/h3[1]' #XPath of element containing the number of courses on the site
 
@@ -16,6 +17,7 @@ numberOfCourses = int(link.text.split(" ")[0])
 for x in range(1,numberOfCourses+1):
     print(driver.find_element(By.XPATH, "/html/body/main/article/section[2]/div/div[2]/div/div/div["+str(x)+"]/a/div[1]/div/div[3]").text)
 
+driver.close() #Closes the chrome window that it opens
 
 #Layout of the XPath for each course
 #/html/body/main/article/section[2]/div/div[2]/div/div/div[1]/a/div[1]/div/div[3]
