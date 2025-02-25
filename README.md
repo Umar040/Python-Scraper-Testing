@@ -11,7 +11,6 @@ The Individual Course checker also just needs selenium.
 KEY:
 
 Missing Apply/Enquire Section = The apply/enquire section is completely missing (This does not check if individual buttons are missing just the section itself)
-
 Missing Video Section = The entire video section is missing
 
 Video is wrong file type = Video section is there but the file type given to it is wrong (Usually image is given instead of an mp4)
