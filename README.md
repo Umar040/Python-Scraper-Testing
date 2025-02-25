@@ -7,7 +7,7 @@ Chrome Driver:
 pip install chromedriver-py
 
 -------------------------------------------BMET Individual Courses Checker.py ------------------------------------------------------  
-The Individual Course checker also just needs selenium. But no Chrome or Firefox Driver as Selenium has it built in now.
+The Individual Course checker also just needs selenium. But no Chrome or Firefox Driver as I found out Selenium has it built in.
 
 KEY:  
 Missing Apply/Enquire Section = The apply/enquire section is completely missing (This does not check if individual buttons are missing just the section itself)  
