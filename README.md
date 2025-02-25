@@ -6,7 +6,7 @@ pip install selenium
 Chrome Driver:
 pip install chromedriver-py
 
--------------------------------------------Individual Course Checker.py ------------------------------------------------------  
+-------------------------------------------BMET Individual Courses Checker.py ------------------------------------------------------  
 The Individual Course checker also just needs selenium.
 
 KEY:  
