@@ -7,6 +7,7 @@ Chrome Driver:
 pip install chromedriver-py
 
 The Individual Course checker also just needs selenium.
+
 KEY:
 
 Missing Apply/Enquire Section = The apply/enquire section is completely missing (This does not check if individual buttons are missing just the section itself)
