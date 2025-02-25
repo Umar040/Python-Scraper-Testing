@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.firefox.options import Options
-import time
 
 opts = Options()
 opts.add_argument("--headless")#Run without GUI so less resource intensive
@@ -74,7 +73,7 @@ for x in range(numberOfCourses):#Keep running until all courses have been checke
         pagesWithErrors.append(errors)
     driver.back()
 
-driver.close() #Closes the chrome window that it opens
+driver.close() #Closes the window that it opens
 
 print(pagesWithErrors)
 
