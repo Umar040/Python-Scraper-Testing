@@ -3,14 +3,20 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.firefox.options import Options
+import csv
 
 opts = Options()
 opts.add_argument("--headless")#Run without GUI so less resource intensive
+#Error sometimes with FireFox where Secure Connection fails.
 
 driver = webdriver.Firefox(options=opts) #Webdriver
 driver.command_executor._client_config._timeout = 10000 #Timeout increased so program does not quit early
 baseUrl = 'https://www.bmet.ac.uk/courses/' #Url being searched
 driver.get(baseUrl)#Opens internet tab with the url provided
+
+#COOKIE CODE uncomment both lines below to enable
+#driver.implicitly_wait(10)
+#driver.find_element(By.XPATH,"/html/body/div[3]/div/div/div/div[2]/button[2]").click()
 
 numberOfCourses = '/html/body/main/article/section[2]/div/div[1]/div/div[1]/h3[1]'
 link = driver.find_element(By.XPATH, numberOfCourses)#Get number of courses
@@ -22,6 +28,7 @@ for x in range(numberOfCourses):#Keep running until all courses have been checke
     vidExist = False
     progExist = False
     errors = []
+    driver.implicitly_wait(5)
     driver.find_elements(By.CLASS_NAME,"course-search-result__inner")[x].click()#Navigate to selected course
     errors.append(driver.current_url)
     #Missing Apply/Enquire Section Check
@@ -49,7 +56,7 @@ for x in range(numberOfCourses):#Keep running until all courses have been checke
         programData = driver.find_element(By.CLASS_NAME,"crs_careers")
         progExist = True
     except NoSuchElementException:
-        errors.append("Program Data Section Missing")
+        errors.append("EMSI Section Missing")
 
     #Program Data(EMSI) Error Check
     if progExist:
@@ -65,7 +72,7 @@ for x in range(numberOfCourses):#Keep running until all courses have been checke
             progError = driver.find_element(By.XPATH,"//div[@id='__next']/div")
             progError = progError.get_attribute("class")[:5]
         if progError == "Error":
-            errors.append("Program Data has an Error")
+            errors.append("EMSI has an Error")
         driver.switch_to.window(driver.window_handles[0]) #Switch back to original driver window
 
     #If there is an error then add the URL and the errors to the pagesWithErrors list
@@ -73,7 +80,55 @@ for x in range(numberOfCourses):#Keep running until all courses have been checke
         pagesWithErrors.append(errors)
     driver.back()
 
-driver.close() #Closes the window that it opens
+driver.close() #Closes the chrome window that it opens
 
+with open('BMET Course Data.csv', 'w', newline='') as File:#Create or Open CSV File with given name in write mode
+    csvWrite = csv.writer(File, quoting=csv.QUOTE_ALL)
+    csvWrite.writerow(['Course URL', 'Does the page have a Apply/Enquire section?','Does the page have a video section?','Is the video file type correct?','Does the page have EMSI?', 'Does the EMSI work correctly?'])
+    for x in pagesWithErrors:#For each error check if it exists then add it to the list
+        check=1
+        addList = [x[0]]
+        if x[check] == "Missing Apply/Enquire Section":
+            addList.append(x[check])
+            if check+1 > len(x)-1:
+                pass
+            else:
+                check+=1
+        else:
+            addList.append("")
+        if x[check] == "Video Section Missing":
+            addList.append(x[check])
+            if check+1 > len(x)-1:
+                pass
+            else:
+                check+=1
+        else:
+            addList.append("")
+        if x[check] == "Video is wrong file type":
+            addList.append(x[check])
+            if check+1 > len(x)-1:
+                pass
+            else:
+                check+=1
+        else:
+            addList.append("")
+        if x[check] == "EMSI Section Missing":
+            addList.append(x[check])
+            if check+1 > len(x)-1:
+                pass
+            else:
+                check+=1
+        else:
+            addList.append("")
+        if x[check] == "EMSI has an Error":
+            addList.append(x[check])
+            if check+1 > len(x)-1:
+                pass
+            else:
+                check+=1
+        else:
+            addList.append("")
+        csvWrite.writerow(addList)#Write the list to the CSV as a new row
+        
 print(pagesWithErrors)
 
