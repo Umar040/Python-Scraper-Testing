@@ -1,4 +1,4 @@
-To use the BMET Scraper just pip install selenium and the chrome driver
+To use the BMET Course Scraper.py just pip install selenium and the chrome driver
 
 Selenium:
 pip install selenium
@@ -7,6 +7,8 @@ Chrome Driver:
 pip install chromedriver-py
 
 -------------------------------------------BMET Individual Courses Checker.py ------------------------------------------------------  
+NOTE: If you are having problems with the drivers being out of date make sure to check Selenium version so that it works with the latest chrome if not then see if there is an update and update Selenium.
+
 The Individual Course checker also just needs selenium. But no Chrome or Firefox Driver as I found out Selenium has it built in.
 
 KEY:  
